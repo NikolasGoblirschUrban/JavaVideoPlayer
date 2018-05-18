@@ -1,4 +1,4 @@
-package sample;
+package player;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +10,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
+        Parent root = FXMLLoader.load(getClass().getResource("view/VideoPlayer.fxml"));
         primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setFullScreen(true);
+        primaryStage.setTitle("Phritte - Steilster Video Player");
         primaryStage.show();
+
     }
 
 
