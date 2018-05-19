@@ -1,8 +1,6 @@
 package player.controller;
 
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -37,42 +35,35 @@ public class VideoPlayerController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         FileChooser fileChooser = new FileChooser();
-        mbMenu.getMenus().get(0).getItems().get(0).setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                fileChooser.setTitle("Chose Video");
-                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Video", "*.mp4"));
-                selectedFile = fileChooser.showOpenDialog(null);
+        mbMenu.getMenus().get(0).getItems().get(0).setOnAction(event -> {
+            fileChooser.setTitle("Chose Video");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Video", "*.mp4"));
+            selectedFile = fileChooser.showOpenDialog(null);
 
-                Media m = new Media(Paths.get(selectedFile.getAbsolutePath()).toUri().toString());
-                player = new MediaPlayer(m);
-                mvPlayer.setMediaPlayer(player);
-                player.setOnEndOfMedia(() -> {
-                    player.seek(new javafx.util.Duration(0));
-                    setIsPlaying();
-                });
+            Media m = new Media(Paths.get(selectedFile.getAbsolutePath()).toUri().toString());
+            player = new MediaPlayer(m);
+            mvPlayer.setMediaPlayer(player);
+            player.setOnEndOfMedia(() -> {
+                player.seek(new javafx.util.Duration(0));
+                setIsPlaying();
+            });
 
-                sldTime.maxProperty().bind(Bindings.createDoubleBinding(
-                        () -> player.getTotalDuration().toSeconds(),
-                        player.totalDurationProperty()));
-                player.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
-                    sldTime.setValue(newValue.toSeconds());
-                });
-            }
+            sldTime.maxProperty().bind(Bindings.createDoubleBinding(
+                    () -> player.getTotalDuration().toSeconds(),
+                    player.totalDurationProperty()));
+            player.currentTimeProperty().addListener((observable, oldValue, newValue) ->
+                    sldTime.setValue(newValue.toSeconds()));
         });
 
-        mbMenu.getMenus().get(0).getItems().get(1).setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                fileChooser.setTitle("Save Video");
-                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Video", "*.mp4"));
-                try {
-                    Files.copy(selectedFile.toPath(), fileChooser.showSaveDialog(null).toPath());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+        mbMenu.getMenus().get(0).getItems().get(1).setOnAction(event -> {
+            fileChooser.setTitle("Save Video");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Video", "*.mp4"));
+            try {
+                Files.copy(selectedFile.toPath(), fileChooser.showSaveDialog(null).toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
         });
 
     }
@@ -91,7 +82,7 @@ public class VideoPlayerController implements Initializable {
         setIsPlaying();
     }
 
-    public void setIsPlaying() {
+    private void setIsPlaying() {
         if (player != null) {
             if (isPlaying) {
                 this.isPlaying = false;
