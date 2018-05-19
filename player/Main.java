@@ -11,11 +11,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("view/VideoPlayer.fxml"));
-        primaryStage.setScene(new Scene(root, 615, 465));
+        primaryStage.setScene(new Scene(root));
         primaryStage.setTitle("Phritten Röhre - Steilster Video Player");
-        primaryStage.setResizable(false);
+        primaryStage.setFullScreen(true);
         primaryStage.show();
-
     }
 
 
