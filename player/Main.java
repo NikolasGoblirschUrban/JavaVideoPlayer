@@ -11,9 +11,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("view/VideoPlayer.fxml"));
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.setFullScreen(true);
-        primaryStage.setTitle("Phritte - Steilster Video Player");
+        primaryStage.setScene(new Scene(root, 615, 465));
+        primaryStage.setTitle("Phritten Röhre - Steilster Video Player");
         primaryStage.show();
 
     }
