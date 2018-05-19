@@ -13,6 +13,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("view/VideoPlayer.fxml"));
         primaryStage.setScene(new Scene(root, 615, 465));
         primaryStage.setTitle("Phritten Röhre - Steilster Video Player");
+        primaryStage.setResizable(false);
         primaryStage.show();
 
     }
