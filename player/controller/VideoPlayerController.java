@@ -36,6 +36,7 @@ public class VideoPlayerController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         FileChooser fileChooser = new FileChooser();
         mbMenu.getMenus().get(0).getItems().get(0).setOnAction(event -> {
+            
             fileChooser.setTitle("Chose Video");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Video", "*.mp4"));
             selectedFile = fileChooser.showOpenDialog(null);
